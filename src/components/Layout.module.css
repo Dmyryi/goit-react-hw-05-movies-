@@ -1,0 +1,14 @@
+.nav_list {
+    display: flex;
+    list-style-type: none;
+
+}
+
+.nav_item:not(:last-child) {
+    padding-right: 50px;
+}
+
+.nav_link {
+    text-decoration: none;
+
+}
