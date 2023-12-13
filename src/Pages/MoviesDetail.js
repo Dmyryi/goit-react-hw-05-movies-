@@ -1,8 +1,7 @@
 import axios from "axios";
-import { Routes, Route,Outlet, Link } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Cast from "./Cast";
 
 const MoviesDetail = () => {
     const { movieId } = useParams();
@@ -39,15 +38,23 @@ const MoviesDetail = () => {
                     ))}
                 </ul>
                 <nav>
-                    <Link to="cast">Cast</Link>
-                    <Link to="reviews">Reviews</Link>
+                    <ul>
+                        <li>
+<Link to="cast">Cast</Link>
+                        </li>
+                        <li>
+                               <Link to="reviews">Reviews</Link>
+                        </li>
+                    </ul>
+                    
+                 
                 </nav>
                 <Outlet movieId/>
                 
                
 
                 
-                {/* <Cast MovieId /> */}
+              
             </div>
         </>
     );
