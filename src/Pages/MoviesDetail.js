@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
@@ -53,7 +53,7 @@ console.log(location)
                         <Link to='cast'>Cast</Link>
                         </li>
                         <li>
-                               <Link to='reviews'>Reviews</Link>
+                        <Link to='reviews'>Reviews</Link>
                         </li>
                     </ul>
                     

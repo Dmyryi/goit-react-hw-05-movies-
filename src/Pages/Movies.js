@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react'
-import axios from 'axios'
-import { Link, useSearchParams, useLocation } from 'react-router-dom';
+import {  useSearchParams } from 'react-router-dom';
 import { searchMovies } from 'api/api';
 import MovieList from '../components/MoviesList';
 

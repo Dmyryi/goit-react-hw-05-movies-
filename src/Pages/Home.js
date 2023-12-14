@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { getTrendingMovies } from "api/api";
 import MovieList from "../components/MoviesList";
 

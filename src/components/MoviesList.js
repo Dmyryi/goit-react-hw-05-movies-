@@ -1,4 +1,4 @@
-import { Link, useSearchParams, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const MovieList =(props)=> {
     const location = useLocation()
@@ -9,10 +9,10 @@ const MovieList =(props)=> {
                 
                 {props.movies.map((item) => (
              item.original_title && (
-          <li key={item.id}>
+             <li key={item.id}>
             <Link to={`/movies/${item.id}`} state={{from:location}}>{item.title}</Link>
-          </li>)
-        ))}
+             </li>)
+             ))}
                 </ul>
                 </div>
     )
