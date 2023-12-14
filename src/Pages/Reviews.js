@@ -1,34 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// Reviews.js
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { getMovieReviews } from '../api/api';
 
 const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=b7d3d78da112d71a39b066cbc166d0c0`
-    )
-    .then((res)=>setReviews(res.data.results))
- 
-      
-    },[movieId]);
+    const fetchReviews = async () => {
+      try {
+        const results = await getMovieReviews(movieId);
+        setReviews(results);
+      } catch (error) {
+        console.error('Error fetching movie reviews:', error);
+      }
+    };
+
+    fetchReviews();
+  }, [movieId]);
 
   return (
     <div>
       <ul>
-              {reviews.map((review) => (
-                  <li>
-                      <h4>Author: {review.author}</h4>
-                      <p>{review.content}</p>
-                   </li>
-       
-          
-      ))}
-          </ul>
-         
-     
+        {reviews.length > 0 ? (
+          reviews.map((review, index) => (
+            <li key={index}>
+              <h4>Author: {review.author}</h4>
+              <p>{review.content}</p>
+            </li>
+          ))
+        ) : (
+          <div>No reviews available</div>
+        )}
+      </ul>
     </div>
   );
 };

@@ -1,35 +1,47 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
+import { searchMovies } from 'api/api';
+import MovieList from '../components/MoviesList';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const search = searchParams.get('search') || ''; // Set to an empty string if null
+  const search = searchParams.get('search') ?? ''; // Set to an empty string if null
   const [movies, setMovies] = useState([]);
 
+  const [searchQuery, setSearchQuery] = useState('')
+
   useEffect(() => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=b7d3d78da112d71a39b066cbc166d0c0&query=${search}`
-      )
-      .then((res) => setMovies(res.data.results));
+       const fetchMovies = async () => {
+      try {
+        const results = await searchMovies(search);
+        setMovies(results);
+      } catch (error) {
+        console.error('Error searching movies:', error);
+      }
+    };
+
+    fetchMovies();
   }, [search]);
 
+
+const handleSubmit = (evt) => {
+  evt.preventDefault();
+  setSearchParams({ search: searchQuery });
+};
+  
   return (
     <>
-     <div>Movies</div>
-      <input
-        type="text"
-        value={search}
-        onChange={(evt) => setSearchParams({ search: evt.target.value })}
-      />
-      <ul>
-        {movies.map((item) => (
-          <li key={item.id}>
-            <Link to={`${item.id}`}>{item.title}</Link>
-          </li>
-        ))}
-      </ul>
+      <div>Movies</div>
+         <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(evt) => setSearchQuery(evt.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
+      <MovieList movies={movies} />
     </>
   );
 };
