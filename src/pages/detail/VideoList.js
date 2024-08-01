@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import tmdbApi from '../../api/tmdbApi';
-import { apiConfig } from '../../api/api';
 
 export const VideoList = props => {
   const { category } = useParams();

@@ -16,7 +16,7 @@ export const CastList = props => {
   return (
     <div className="casts">
       {casts.map((item, i) => (
-        <div className="casts__item">
+        <div key={i} className="casts__item">
           <div
             className="casts__item__img"
             style={{
