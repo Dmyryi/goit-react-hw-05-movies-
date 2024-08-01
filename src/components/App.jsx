@@ -1,33 +1,21 @@
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import '../../node_modules/swiper/swiper.min.css';
+import '../assets/boxicons-2.0.7/css/boxicons.min.css';
+import './App.scss';
 
-import Cast from '../Pages/Cast';
-import { Layout } from './Layout';
-import Reviews from 'Pages/Reviews';
-
-import { lazy, Suspense } from 'react';
-
-const Home = lazy(() => import('../Pages/Home'));
-const Movies = lazy(() => import('../Pages/Movies'));
-const MoviesDetail = lazy(() => import('../Pages/MoviesDetail'));
+import Header from './header/Header';
+import Footer from './footer/Footer';
+import AppRoutes from '../config/Routes'; // Adjusted import to match the component name
 
 export const App = () => {
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <Suspense fallback={<div>Loading...</div>}>
-            <Layout />
-          </Suspense>
-        }
-      >
-        <Route index element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/movies/:movieId" element={<MoviesDetail />}>
-          <Route path="cast" element={<Cast />} />
-          <Route path="reviews" element={<Reviews />} />
-        </Route>
-      </Route>
-    </Routes>
+    <>
+      <Header />
+      <Suspense fallback={<div>Loading...</div>}>
+        <AppRoutes />
+      </Suspense>
+      <Footer />
+    </>
   );
 };
